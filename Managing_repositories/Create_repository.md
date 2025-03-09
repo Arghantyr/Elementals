@@ -30,21 +30,29 @@ Make sure you have GitHub CLI installed. Assuming you are using apt-get package 
 Several names will pop up several times and its neat to automize this part a little bit, if not for saving time than for decreasing that chance of making a mistake.
 
 ##### Set variables script
-Prepare a script to set the variables that will be used throughout the process
+Prepare a script to set the variables that will be used throughout the process:
 ```
 #!/bin/bash
 
 export REPO='<your repo name>'
 ```
-
+and save it in a convenient directory, e.g., `scripts`
+To execute it you will need `execute` permissions, so verify them and adjust accordingly. Assuming you want to be the only one with the access, use the following `chmod` command:
+```chmod u=rwx,go=-rwx ./scripts/set_env_vars.sh```
+This will set read (r), write (w), and execute (x) permissions for user (you, the creator, and revoke them (-rwx) for group (g) and others (o).
+Then source it:
+```. ./scripts/set_env_vars.sh``` (alternatively ```source ./scripts/set_env_vars.sh``` will work in bash, but not in, e.g., dash)
+Verify that the variable is available in your shell using ```echo $REPO```:
+![Setting shell environment variables via shell export script](/img/setting-env-vars-via-export-script.png)
 ##### Unset variables script
-Prepare a script to unset the cariables so they don't linger in the system
+Prepare a script to unset the variables so they don't linger in the system. Save the file in the same directory as the `set_env_vars.sh` script and give it the same permissions.
 ```
 #!/bin/bash
 
 unset REPO
 ```
-
+Finally source it and verify that the variables are unset.
+![Unsetting shell environment variables via shell export script](/img/unsetting-env-vars-via-export-script.png)
 #### Preparing the tool
 Before using the tool (Github CLI) we have to make sure it works properly. 
 Github CLI privides 2 ways of doing that:
@@ -52,13 +60,14 @@ Github CLI privides 2 ways of doing that:
 > To get started with GitHub CLI, please run:  gh auth login
 > Alternatively, populate the GH_TOKEN environment variable with a GitHub API authentication token.
 
-gh auth shenanigans
+![Authenticating connection to GitHub profile through GitHub CLI](/img/github-auth-passed-successfully.png)
 ...
 
 ### Create a new repository
 Before running the create repo command make sure you enter its final state flag (--private, --public, --internal), then include it in the command:
 ```gh repo create <state flag> <your repo name>```
-how repo is created PNG
+The 'status flag' is mandatory.
+![Creating a new GitHub repository via GitHub CLI](img/github-cli-creating-new-repo.png)
 ...
 
 ### Create source (local repository)
