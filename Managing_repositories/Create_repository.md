@@ -67,7 +67,7 @@ Github CLI privides 2 ways of doing that:
 Before running the create repo command make sure you enter its final state flag (--private, --public, --internal), then include it in the command:
 ```gh repo create <state flag> <your repo name>```
 The 'status flag' is mandatory.
-![Creating a new GitHub repository via GitHub CLI](img/github-cli-creating-new-repo.png)
+![Creating a new GitHub repository via GitHub CLI](/img/github-cli-creating-new-repo.png)
 ...
 
 ### Create source (local repository)
